@@ -17,6 +17,10 @@ function CustomDataTable({ data }) {
     setOpenAddEditModal({ isShown: true, type: "edit", data: user });
   };
 
+  const handleAdd = () => {
+    setOpenAddEditModal({ isShown: true, type: "add", data : null})
+  }
+
   const statusStyles = {
     New: "bg-blue-100 text-blue-600",
     "In-progress": "bg-yellow-100 text-yellow-600",
@@ -109,6 +113,12 @@ function CustomDataTable({ data }) {
           className="rounded-lg"
         />
         <span>63 results</span>
+        <button 
+        onClick={handleAdd}
+        className="ml-200 border p-2 bg-blue-500 text-white 
+        rounded-2xl">
+          Add User
+        </button>
       </div>
       <Modal
         isOpen={openAddEditModal.isShown}

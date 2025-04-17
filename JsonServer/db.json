@@ -85,6 +85,15 @@
       "date": "10/06/2023",
       "status": "Completed",
       "avatar": "./Lab_05/Avatar (5).png"
+    },
+    {
+      "id": 7,
+      "name": "ThanhTung",
+      "company": "IUH",
+      "value": "$900",
+      "status": "New",
+      "date": "17/04/2025",
+      "avatar": "./Lab_05/Avatar (1).png"
     }
   ]
 }

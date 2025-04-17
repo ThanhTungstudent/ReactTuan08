@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { MdClose } from "react-icons/md";
 
 function AddEditUser({ onClose, user, type }) {
@@ -25,18 +25,15 @@ function AddEditUser({ onClose, user, type }) {
   }
 
   const handleSaveUser = async () => {
-    const payload = {
-      name: customerName,
-      company,
-      value,
-      status,
-      date: convertToDisplayDateFormat(date),
-    };
-    console.log(user.id);
-    
-
     try {
-      if (type === "edit") {
+      if (type === "edit" && user) {
+        const payload = {
+          name: customerName,
+          company,
+          value,
+          status,
+          date: convertToDisplayDateFormat(date),
+        };
         await fetch(`http://localhost:3000/user/${user.id}`, {
           method: "PATCH",
           headers: {
@@ -45,6 +42,24 @@ function AddEditUser({ onClose, user, type }) {
           body: JSON.stringify(payload),
         });
         alert("Cập nhật người dùng thành công!");
+      } else {
+        const payload = {
+          name: customerName,
+          company,
+          value,
+          status,
+          date: convertToDisplayDateFormat(date),
+          avatar: "./Lab_05/Avatar (1).png",
+          id: 7,
+        };
+        await fetch(`http://localhost:3000/user`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+        alert("Thêm người dùng mới thành công!");
       }
       onClose();
     } catch (error) {
