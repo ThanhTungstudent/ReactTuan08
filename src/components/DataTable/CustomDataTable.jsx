@@ -1,8 +1,22 @@
 import React, { useState } from "react";
 import DataTable from "react-data-table-component";
 import { CiEdit } from "react-icons/ci";
+import Modal from "react-modal";
+import AddEditUser from "../AddEditUser/AddEditUser";
+
+Modal.setAppElement("#root");
 
 function CustomDataTable({ data }) {
+  const [openAddEditModal, setOpenAddEditModal] = useState({
+    isShown: false,
+    type: "add",
+    data: null,
+  });
+
+  const handleEdit = (user) => {
+    setOpenAddEditModal({ isShown: true, type: "edit", data: user });
+  };
+
   const statusStyles = {
     New: "bg-blue-100 text-blue-600",
     "In-progress": "bg-yellow-100 text-yellow-600",
@@ -96,6 +110,21 @@ function CustomDataTable({ data }) {
         />
         <span>63 results</span>
       </div>
+      <Modal
+        isOpen={openAddEditModal.isShown}
+        onRequestClose={() => {}}
+        style={{ overlay: { backgroundColor: "rgba(0,0,0,0.2)" } }}
+        contentLabel=""
+        className="w-[40%] max-md:w-[60%] max-sm:w-[70%] max-h-3/4 bg-white rounded-md mx-auto mt-14 p-5 overflow-scroll"
+      >
+        <AddEditUser
+          onClose={() => {
+            setOpenAddEditModal({ isShown: false, type: "add", data: null });
+          }}
+          user={openAddEditModal.data}
+          type={openAddEditModal.type}
+        />
+      </Modal>
     </>
   );
 }
