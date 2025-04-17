@@ -1,5 +1,7 @@
-import { CiShoppingCart } from "react-icons/ci";
-function Overview() {
+import React, { useEffect, useState } from "react";
+import Card from "../Card/Card";
+
+function Overview({ overviews }) {
   return (
     <div className="w-full p-5 space-y-5">
       <div className="flex flex-row gap-2">
@@ -7,33 +9,15 @@ function Overview() {
         <h1 className="text-2xl font-bold text-black">Overview</h1>
       </div>
       <div className="grid grid-cols-3 gap-5">
-        <div
-          className={`w-[300px] h-[130px] p-5 rounded-[5px] 
-    bg-pink-300`}
-        >
-          <div className="flex flex-row justify-between">
-            <p>Turmover</p>
-            <button
-              className={`p-2 border rounded-md 
-            
-              "border-pink-600"
-              
-          `}
+        {overviews &&
+          overviews.map((overview, index) => (
+            <div
+              key={index}
+              className="flex w-full items-center justify-center"
             >
-              <CiShoppingCart className="text-pink-600" size={24}/>
-            </button>
-          </div>
-          <div className="">
-            <p className="text-2xl text-black font-bold">$92,405</p>
-            <div className="mt-2">
-                <div>
-                  <span className="text-green-600">▲ </span>
-                  <span className="text-green-600">5.39%</span>
-                  <span className="text-gray-400">period of change</span>
-                </div>
+              <Card overview={overview} />
             </div>
-          </div>
-        </div>
+          ))}
       </div>
     </div>
   );

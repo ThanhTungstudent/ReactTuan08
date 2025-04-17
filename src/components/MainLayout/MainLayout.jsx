@@ -12,7 +12,7 @@ function MainLayout({ overviews }) {
       </div>
       <div className="col-span-3">
         <Header />
-        <Overview  />
+        <Overview  overviews={overviews}/>
         <div className="mt-4">
           <Outlet />
         </div>
