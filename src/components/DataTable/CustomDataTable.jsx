@@ -2,64 +2,7 @@ import React, { useState } from "react";
 import DataTable from "react-data-table-component";
 import { CiEdit } from "react-icons/ci";
 
-const data = [
-  {
-    id: 1,
-    name: "Elizabeth Lee",
-    company: "AvatarSystems",
-    value: "$359",
-    date: "10/07/2023",
-    status: "New",
-    avatar: "./Lab_05/Avatar.png",
-  },
-  {
-    id: 2,
-    name: "Carlos Garcia",
-    company: "SmoozeShift",
-    value: "$747",
-    date: "24/07/2023",
-    status: "New",
-    avatar: "./Lab_05/Avatar (1).png",
-  },
-  {
-    id: 3,
-    name: "Elizabeth Bailey",
-    company: "Prime Time Telecom",
-    value: "$564",
-    date: "08/08/2023",
-    status: "In-progress",
-    avatar: "./Lab_05/Avatar (2).png",
-  },
-  {
-    id: 4,
-    name: "Ryan Brown",
-    company: "OmniTech Corporation",
-    value: "$541",
-    date: "31/08/2023",
-    status: "In-progress",
-    avatar: "./Lab_05/Avatar (3).png",
-  },
-  {
-    id: 5,
-    name: "Ryan Young",
-    company: "DataStream Inc.",
-    value: "$769",
-    date: "01/05/2023",
-    status: "Completed",
-    avatar: "./Lab_05/Avatar (4).png",
-  },
-  {
-    id: 6,
-    name: "Hailey Adams",
-    company: "FlowRush",
-    value: "$922",
-    date: "10/06/2023",
-    status: "Completed",
-    avatar: "./Lab_05/Avatar (5).png",
-  },
-];
-
-function CustomDataTable() {
+function CustomDataTable({ data }) {
   const statusStyles = {
     New: "bg-blue-100 text-blue-600",
     "In-progress": "bg-yellow-100 text-yellow-600",
