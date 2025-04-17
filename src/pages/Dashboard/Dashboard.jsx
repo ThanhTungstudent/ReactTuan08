@@ -1,13 +1,8 @@
 import React from "react";
-
+import CustomDataTable from "../../components/DataTable/CustomDataTable";
 
 function Dashboard() {
-
-  return (
-    <div>
-      Detailed report
-    </div>
-  )
+  return <CustomDataTable />;
 }
 
 export default Dashboard;
