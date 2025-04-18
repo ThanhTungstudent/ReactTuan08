@@ -12,11 +12,13 @@ function Card({ overview }) {
   };
   return (
     <div
-      className={`w-[300px] h-[130px] p-5 rounded-[5px] 
-    bg-${overview?.bgColor}`}
+      className="w-full max-w-sm h-auto p-4 md:p-5 rounded-md shadow-sm"
+      style={{ backgroundColor: overview?.bgColor || "#f9fafb" }}
     >
-      <div className="flex flex-row justify-between">
-        <p>{overview?.title}</p>
+      <div className="flex flex-row justify-between items-center">
+        <p className="text-sm md:text-base font-medium text-gray-800">
+          {overview?.title}
+        </p>
         <button
           className={`p-2 border rounded-md ${
             overview?.icon === "shopping_cart"
@@ -27,20 +29,21 @@ function Card({ overview }) {
           {iconMap[overview?.icon]}
         </button>
       </div>
-      <div className="">
-        <p className="text-2xl text-black font-bold">{overview?.value}</p>
-        <div className="mt-2">
+
+      <div className="mt-3">
+        <p className="text-xl md:text-2xl text-black font-bold">
+          {overview?.value}
+        </p>
+        <div className="mt-2 text-sm">
           {overview?.change_type === "increase" ? (
-            <div>
-              <span className="text-green-600">▲ </span>
-              <span className="text-green-600">{overview?.change}</span>
+            <div className="text-green-600">
+              <span>▲ {overview?.change}</span>
               <span className="text-gray-400"> {overview?.desciption}</span>
             </div>
           ) : (
-            <div>
-              <span>▼ </span>
-              <span>{overview?.change}</span>
-              <span> {overview?.desciption}</span>
+            <div className="text-red-500">
+              <span>▼ {overview?.change}</span>
+              <span className="text-gray-400"> {overview?.desciption}</span>
             </div>
           )}
         </div>

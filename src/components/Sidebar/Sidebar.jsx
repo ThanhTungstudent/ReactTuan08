@@ -12,39 +12,44 @@ const sidebarItems = [
 
 function Sidebar() {
   return (
-    <div className="flex flex-col w-full p-3 items-center justify-center bg-gray-50 space-y-5">
-      <div>
-        <img src="./Lab_05/Image 1858.png" alt="Logo" />
+    <div className="flex flex-col w-full p-4 bg-gray-50 space-y-5 min-h-screen">
+      
+      <div className="flex justify-center">
+        <img src="./Lab_05/Image 1858.png" alt="Logo" className="max-w-[120px]" />
       </div>
 
-      <div className="flex flex-col p-2 w-full space-y-2">
+      
+      <div className="flex flex-col p-2 space-y-2 overflow-y-auto">
         {sidebarItems.map((item) => (
           <NavLink
             key={item.to}
             to={item.to}
             className={({ isActive }) =>
-              `flex flex-row gap-2 p-2 rounded-xl items-center ${
+              `flex flex-row gap-3 p-2 rounded-xl items-center text-sm transition ${
                 isActive
                   ? "bg-pink-500 text-white"
                   : "text-gray-600 hover:bg-gray-100"
               }`
             }
           >
-            <img src={item.icon} alt={item.label} />
+            <img src={item.icon} alt={item.label} className="w-5 h-5" />
             <span>{item.label}</span>
           </NavLink>
         ))}
       </div>
 
-      <div className="bg-blue-50 p-5 flex flex-col items-center justify-center space-y-3 rounded-xl w-full">
-        <img src="./Lab_05/Group.png" className="w-[70%]" alt="Update" />
-        <span className="text-xl text-black font-bold">V2.0 is available</span>
-        <button className="w-full border border-blue-300 bg-white text-blue-500 p-1 rounded-xl hover:bg-blue-100 transition">
+      <div className="bg-blue-50 p-4 flex flex-col items-center space-y-3 rounded-xl w-full 
+      mt-auto">
+        <img src="./Lab_05/Group.png" className="w-[70%] max-w-[120px]" alt="Update" />
+        <span className="text-center text-sm font-bold text-black">V2.0 is available</span>
+        <button className="w-full border border-blue-300 bg-white text-blue-500 text-sm py-1 
+        rounded-xl hover:bg-blue-100 transition">
           Try now
         </button>
       </div>
     </div>
   );
 }
+
 
 export default Sidebar;

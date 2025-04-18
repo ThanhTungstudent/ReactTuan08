@@ -70,7 +70,7 @@ function AddEditUser({ onClose, user, type, refetchData }) {
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <button
         className="w-10 h-10 rounded-full flex items-center justify-center absolute 
         -top-3 -right-3 hover:bg-slate-50"
@@ -79,14 +79,13 @@ function AddEditUser({ onClose, user, type, refetchData }) {
         <MdClose className="text-xl text-slate-400" />
       </button>
 
-      <div className="flex flex-col gap-2">
-        <label className="input-label text-red-400 uppercase">
+      <div className="flex flex-col gap-2 mt-5">
+        <label className="text-sm font-semibold text-red-400 uppercase">
           Customer Name
         </label>
-
         <input
           type="text"
-          className="text-2xl text-slate-950 outline-none bg-slate-50 p-2 rounded"
+          className="text-base text-slate-950 outline-none bg-slate-50 p-2 rounded w-full"
           placeholder="Customer name"
           value={customerName}
           onChange={(e) => setCustomerName(e.target.value)}
@@ -94,11 +93,12 @@ function AddEditUser({ onClose, user, type, refetchData }) {
       </div>
 
       <div className="flex flex-col gap-2 mt-4">
-        <label className="input-label text-red-400 uppercase">company</label>
-
+        <label className="text-sm font-semibold text-red-400 uppercase">
+          Company
+        </label>
         <input
           type="text"
-          className="text-sm text-slate-950 outline-none bg-slate-50 p-2 rounded"
+          className="text-base text-slate-950 outline-none bg-slate-50 p-2 rounded w-full"
           placeholder="Company"
           value={company}
           onChange={(e) => setCompany(e.target.value)}
@@ -106,12 +106,12 @@ function AddEditUser({ onClose, user, type, refetchData }) {
       </div>
 
       <div className="flex flex-col gap-2 mt-4">
-        <label className="input-label text-red-400 uppercase">
-          order value
+        <label className="text-sm font-semibold text-red-400 uppercase">
+          Order Value
         </label>
         <input
           type="text"
-          className="text-2xl text-slate-950 outline-none bg-slate-50 p-2 rounded"
+          className="text-base text-slate-950 outline-none bg-slate-50 p-2 rounded w-full"
           placeholder="$value"
           value={value}
           onChange={(e) => setValue(e.target.value)}
@@ -119,53 +119,42 @@ function AddEditUser({ onClose, user, type, refetchData }) {
       </div>
 
       <div className="flex flex-col gap-2 mt-4">
-        <label className="input-label text-red-400 uppercase">order date</label>
+        <label className="text-sm font-semibold text-red-400 uppercase">
+          Order Date
+        </label>
         <input
           type="date"
-          className="text-2xl text-slate-950 outline-none bg-slate-50 p-2 rounded"
+          className="text-base text-slate-950 outline-none bg-slate-50 p-2 rounded w-full"
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
       </div>
 
       <div className="flex flex-col gap-2 mt-4">
-        <label className="input-lable text-red-400 uppercase">Status</label>
-        <div className="flex gap-4">
-          <label className="flex items-center gap-2 text-sm text-slate-700">
-            <input
-              type="radio"
-              value="New"
-              checked={status === "New"}
-              onChange={(e) => setStatus(e.target.value)}
-            />
-            New
-          </label>
-        </div>
-        <div className="flex gap-4">
-          <label className="flex items-center gap-2 text-sm text-slate-700">
-            <input
-              type="radio"
-              value="In-progress"
-              checked={status === "In-progress"}
-              onChange={(e) => setStatus(e.target.value)}
-            />
-            In-progress
-          </label>
-        </div>
-        <div className="flex gap-4">
-          <label className="flex items-center gap-2 text-sm text-slate-700">
-            <input
-              type="radio"
-              value="Completed"
-              checked={status === "Completed"}
-              onChange={(e) => setStatus(e.target.value)}
-            />
-            Completed
-          </label>
+        <label className="text-sm font-semibold text-red-400 uppercase">
+          Status
+        </label>
+        <div className="flex flex-col sm:flex-row sm:gap-4 gap-2">
+          {["New", "In-progress", "Completed"].map((option) => (
+            <label
+              key={option}
+              className="flex items-center gap-2 text-sm text-slate-700"
+            >
+              <input
+                type="radio"
+                value={option}
+                checked={status === option}
+                onChange={(e) => setStatus(e.target.value)}
+              />
+              {option}
+            </label>
+          ))}
         </div>
       </div>
+
       <button
-        className="bg-amber-400 font-medium mt-5 ml-110 p-3"
+        className="w-full sm:w-auto bg-amber-400 text-white font-semibold mt-6 px-6 py-3 
+        rounded-md hover:bg-amber-500 transition"
         onClick={handleSaveUser}
       >
         {type === "edit" ? "SAVE" : "ADD"}
