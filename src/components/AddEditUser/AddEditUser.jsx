@@ -1,7 +1,7 @@
 import React, { use, useState } from "react";
 import { MdClose } from "react-icons/md";
 
-function AddEditUser({ onClose, user, type }) {
+function AddEditUser({ onClose, user, type, refetchData }) {
   const [customerName, setCustomerName] = useState(user?.name || null);
   const [company, setCompany] = useState(user?.company || null);
   const [value, setValue] = useState(user?.value || null);
@@ -61,6 +61,7 @@ function AddEditUser({ onClose, user, type }) {
         });
         alert("Thêm người dùng mới thành công!");
       }
+      await refetchData();
       onClose();
     } catch (error) {
       console.error("Error saving user:", error);

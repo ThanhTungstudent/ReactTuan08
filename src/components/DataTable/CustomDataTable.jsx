@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { CiEdit } from "react-icons/ci";
 import Modal from "react-modal";
@@ -6,20 +6,54 @@ import AddEditUser from "../AddEditUser/AddEditUser";
 
 Modal.setAppElement("#root");
 
-function CustomDataTable({ data }) {
+function CustomDataTable() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [openAddEditModal, setOpenAddEditModal] = useState({
     isShown: false,
     type: "add",
     data: null,
   });
 
+  const fetchData = async () => {
+    try {
+      const userRes = await fetch("http://localhost:3000/user");
+
+      if (!userRes.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      const userData = await userRes.json();
+
+      setData(userData);
+    } catch (error) {
+      setError(error.message);
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   const handleEdit = (user) => {
     setOpenAddEditModal({ isShown: true, type: "edit", data: user });
   };
 
   const handleAdd = () => {
-    setOpenAddEditModal({ isShown: true, type: "add", data : null})
-  }
+    setOpenAddEditModal({ isShown: true, type: "add", data: null });
+  };
 
   const statusStyles = {
     New: "bg-blue-100 text-blue-600",
@@ -113,10 +147,11 @@ function CustomDataTable({ data }) {
           className="rounded-lg"
         />
         <span>63 results</span>
-        <button 
-        onClick={handleAdd}
-        className="ml-200 border p-2 bg-blue-500 text-white 
-        rounded-2xl">
+        <button
+          onClick={handleAdd}
+          className="ml-200 border p-2 bg-blue-500 text-white 
+        rounded-2xl"
+        >
           Add User
         </button>
       </div>
@@ -133,6 +168,7 @@ function CustomDataTable({ data }) {
           }}
           user={openAddEditModal.data}
           type={openAddEditModal.type}
+          refetchData={fetchData}
         />
       </Modal>
     </>
